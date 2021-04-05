@@ -1,33 +1,36 @@
 import { Fragment } from "react";
-// import Head from "next/head";
+import Head from "next/head";
+import Link from "next/link";
 
 export const Layout = (props) => {
   const head = () => (
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossOrigin="anonymous"
-    />
+    <Head>
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossOrigin="anonymous"
+      />
+    </Head>
   );
 
   const nav = () => {
     return (
       <ul className="nav nav-tabs bg-primary">
         <li className="nav-item">
-          <a className="nav-link text-light" href="">
-            Home
-          </a>
+          <Link href="/">
+            <a className="nav-link text-light">Home</a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link text-light" href="">
-            Login
-          </a>
+          <Link href="/login">
+            <a className="nav-link text-light">Login</a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link text-light" href="">
-            Register
-          </a>
+          <Link href="/signup">
+            <a className="nav-link text-light">Sign up</a>
+          </Link>
         </li>
       </ul>
     );
