@@ -3,12 +3,11 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-// Register User EndPoint
-app.get("/api/register", (req, res) => {
-  res.json({
-    data: "Register EndPoint",
-  });
-});
+// Import Routes
+const authRoutes = require("./routes/auth");
+
+// Middleware
+app.use("/api", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is Working on PORT: ${PORT}`);
