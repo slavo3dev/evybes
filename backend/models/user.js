@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const crypto = require( "crypto" )
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -25,7 +27,7 @@ const userSchema = new mongoose.Schema(
       max: 32,
       lowercase: true,
     },
-    hash_password: {
+    hashed_password: {
       type: String,
       require: true,
     },
@@ -43,3 +45,38 @@ const userSchema = new mongoose.Schema(
 );
 
 // virtual fileds
+userSchema.virtual( 'password' )
+  .set( function ( password ) {
+    // create temp password
+    this._password = password
+
+    // generate slat
+    this.salt = this.makeSalt()
+    
+    //encrypt password 
+    this.hashed_password = this.encryptPassword(password)
+
+  } )
+  .get( function ()
+  {
+   return this._password
+ })
+
+userSchema.methods = {
+  encryptPassword: function ( password ){
+    
+    if ( !password ) return ""
+    
+    try {
+      return crypto.createHmac( 'sha1', secret )
+        .update( " I love cookies" )
+        .digest("hex")
+    } catch ( err ) {
+      console.log( "Error: ", err )
+      return ""
+    }
+  
+  }
+
+
+}
