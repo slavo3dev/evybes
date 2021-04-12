@@ -63,20 +63,33 @@ userSchema.virtual( 'password' )
  })
 
 userSchema.methods = {
+
+  authenticate: function (plainText)
+  {
+    return this.encryptPassword(plainText) === this.hashed_password
+  }, 
+
   encryptPassword: function ( password ){
     
     if ( !password ) return ""
     
     try {
-      return crypto.createHmac( 'sha1', secret )
-        .update( " I love cookies" )
+      return crypto.createHmac( 'sha1', this.salt )
+        .update( passwords )
         .digest("hex")
     } catch ( err ) {
       console.log( "Error: ", err )
       return ""
     }
   
+  },
+  
+  // Make Salt
+  makeSlat: function ()
+  {
+     return Math.round(new Date().valueOf() * Math.random()) + ""
   }
 
-
 }
+
+module.exports = mongoose.model("USER", userSchema)
