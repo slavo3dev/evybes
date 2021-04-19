@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-const PORT = process.env.PORT || process.env.PORT;
-
 // Import Routes
 const authRoutes = require("./routes/auth");
 
@@ -14,10 +12,15 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
+const PORT = process.env.PORT;
 
-
-// Middleware
+// routes
 app.use("/api", authRoutes);
+
+// app middleware
+app.use(morgan("dev"));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`Server is Working on PORT: ${PORT}`);
