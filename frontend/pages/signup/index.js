@@ -25,7 +25,7 @@ export default function signUp() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.table({name,email,password});
+
     axios.post(`http://localhost:8080/api/register`, {
       name: name,
       email: email,

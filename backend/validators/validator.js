@@ -1,6 +1,6 @@
 const { check } = require("express-validator");
 
-exports.registerValidator = [
+exports.userRegisterValidator = [
   check("name")
     .not()
     .isEmpty()
@@ -11,6 +11,6 @@ exports.registerValidator = [
     .withMessage("MAST BE VALID PASSWORD"),
   check("password")
     .not()
-    .isLength({ min: 6 })
+    .isLength({ min: 5 })
     .withMessage("PASSWORD MUST BE AT LEAST 6 CHARACTERS LONG")
 ];
