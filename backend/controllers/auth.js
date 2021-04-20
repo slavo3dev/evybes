@@ -1,5 +1,3 @@
 exports.register = (req, res) => {
-  res.json({
-    data: "Register EndPoint",
-  });
+  console.log(req.body);
 };

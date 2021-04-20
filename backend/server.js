@@ -20,7 +20,8 @@ app.use("/api", authRoutes);
 // app middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cors());
+
+app.use(cors({ origin: process.env.CLIENT_URL }));
 
 app.listen(PORT, () => {
   console.log(`Server is Working on PORT: ${PORT}`);
