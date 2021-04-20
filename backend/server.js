@@ -5,23 +5,26 @@ const app = express();
 const authRoutes = require("./routes/auth");
 
 // import modules
-const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+
+app.use(express.json());
 
 require("dotenv").config();
 
 const PORT = process.env.PORT;
 
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 // routes
-app.use("/api", authRoutes);
+app.use("/api", cors(corsOptions), authRoutes);
 
 // app middleware
 app.use(morgan("dev"));
-app.use(bodyParser.json());
-
-app.use(cors({ origin: process.env.CLIENT_URL }));
 
 app.listen(PORT, () => {
   console.log(`Server is Working on PORT: ${PORT}`);

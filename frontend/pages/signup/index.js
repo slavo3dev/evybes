@@ -1,5 +1,6 @@
 import { Layout } from "../../components";
-import { useState } from "react";
+import {useState} from "react";
+import axios from "axios"
 
 export default function signUp() {
   const [userInfo, setUserInfo] = useState({
@@ -24,7 +25,14 @@ export default function signUp() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.table({ name, email, password });
+    console.table({name,email,password});
+    axios.post(`http://localhost:8080/api/register`, {
+      name: name,
+      email: email,
+      password: password
+    })
+      .then(respose => console.log("Response: ",respose))
+      .catch(error => console.error("Error Message: ", error))
   };
 
   const signUpForm = () => {
