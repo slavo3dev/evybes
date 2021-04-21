@@ -7,11 +7,16 @@ const authRoutes = require("./routes/auth");
 // import modules
 const morgan = require("morgan");
 const cors = require("cors");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 app.use(express.json());
 
 require("dotenv").config();
+
+// db connection
+mongoose.connect(process.env.DB_CLOUD, { useUnifiedTopology: true, useNewUrlParser: true })
+  .then(() => console.log("MONGO DB CONNECTED"))
+  .catch((err) => console.log("ERROR DB CONNECTION: ", err));
 
 const PORT = process.env.PORT;
 
