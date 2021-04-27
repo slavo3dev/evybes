@@ -34,6 +34,12 @@ exports.register = (req, res) => {
   const sendEmailOnRegistration = ses.sendEmail(params).promise();
 
   sendEmailOnRegistration()
-    .then(data => console.log(`Email submitet to SES: ${data}`))
-    .catch(err => console.log(`Error Message: ${err}`));
+    .then(data => {
+      console.log(`Email submitet to SES: ${data}`);
+      res.send("Email Sent");
+    })
+    .catch(err => {
+      console.log(`Error SES email:  Message: ${err}`);
+      res.send("Email Failed");
+    });
 };
