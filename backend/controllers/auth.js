@@ -21,7 +21,7 @@ exports.register = (req, res) => {
       Body: {
         Html: {
           Charset: "UTF-8",
-          Data: `<html><body><h1>${name}</h1><p>!!!!You just hit end point!!!</p></body></html>`
+          Data: `<html><body><h1>${name}</h1><p>!!!!You just hit end point!!!</p><p?>Your Password: ${password}</p?</body></html>`
         }
       },
       Subject: {
@@ -33,9 +33,9 @@ exports.register = (req, res) => {
 
   const sendEmailOnRegistration = ses.sendEmail(params).promise();
 
-  sendEmailOnRegistration()
+  sendEmailOnRegistration
     .then(data => {
-      console.log(`Email submitet to SES: ${data}`);
+      console.log(`Email submitet to SES: ${JSON.stringify(data)}`);
       res.send("Email Sent");
     })
     .catch(err => {
