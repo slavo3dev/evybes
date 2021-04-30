@@ -16,7 +16,7 @@ exports.register = (req, res) => {
     Destination: {
       ToAddresses: [email]
     },
-    ReplyToAddresses: process.env.EMAIL_TO,
+    ReplyToAddresses: [process.env.EMAIL_TO],
     Message: {
       Body: {
         Html: {
