@@ -1,4 +1,4 @@
-exports.registerEmailParams = (email, token) => {
+module.exports = function registerEmailParams (email, token) {
   return {
     Source: process.env.EMAIL_FROM,
     Destination: {

@@ -31,8 +31,24 @@ export default function signUp() {
       email: email,
       password: password
     })
-      .then(respose => console.log("Response: ",respose))
-      .catch(error => console.error("Error Message: ", error))
+      .then(response => {
+        setUserInfo({
+          ...userInfo, 
+          name: "",
+          email: "",
+          password: "",
+          btnText: "Submitted",
+          success: response.data.message
+        })
+      })
+      .catch(error => {
+        setUserInfo({
+          ...userInfo,
+          btnText: "Login",
+          error: error.response.data.error
+          
+        })
+      })
   };
 
   const signUpForm = () => {
@@ -71,6 +87,8 @@ export default function signUp() {
 
   return (
     <Layout>
+      {success && success}
+      {error && error}
       <div className="col-md-6 offset-md-3">
         <h1>Sign Up</h1>
         <br />
