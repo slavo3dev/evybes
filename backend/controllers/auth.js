@@ -38,7 +38,7 @@ exports.register = (req, res) => {
       .catch(err => {
         console.log(`Error SES email:  Message: ${err}`);
         res.json({
-          error: "We could not verfy your email, please try again"
+          message: "We could not verfy your email, please try again"
         });
       });
   });
