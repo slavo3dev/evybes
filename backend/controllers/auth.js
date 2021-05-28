@@ -1,4 +1,6 @@
+const USER = require("../models/user");
 const AWS = require("aws-sdk");
+const jwt = require("jsonwebtoken");
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -11,6 +13,16 @@ const ses = new AWS.SES({ appVersion: "2010-12-01" });
 exports.register = (req, res) => {
   const { name, email, password } = req.body;
 
+  // Check if User is in db
+  USER.findOne({ email: email }).exec((_err, user) => {
+    if (user) {
+      return res.status(400).json({
+        error: "Email is taken"
+      });
+    }
+
+    // generete user JWT token for auth
+  });
   const params = {
     Source: process.env.EMAIL_FROM,
     Destination: {
