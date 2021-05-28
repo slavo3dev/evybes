@@ -31,11 +31,15 @@ exports.register = (req, res) => {
     sendEmailOnRegistration
       .then(data => {
         console.log(`Email submitet to SES: ${JSON.stringify(data)}`);
-        res.send("Email Sent");
+        res.json({
+          message: `The email has been sent to ${email} for the instructions to complete your registration`
+        });
       })
       .catch(err => {
         console.log(`Error SES email:  Message: ${err}`);
-        res.send("Email Failed");
+        res.json({
+          error: "We could not verfy your email, please try again"
+        });
       });
   });
 };
