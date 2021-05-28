@@ -12,17 +12,18 @@ const ses = new AWS.SES({ appVersion: "2010-12-01" });
 
 exports.register = (req, res) => {
   const { name, email, password } = req.body;
-
+a
   // Check if User is in db
   USER.findOne({ email: email }).exec((_err, user) => {
     if (user) {
       return res.status(400).json({
-        error: "Email is taken"
+        error: "Email is taken already!!"
       });
     }
-
     // generete user JWT token for auth
+    const token = jwt.sign({ name, email, password }, process.env.JWT_ACCOUNT_ACTIVATION, { expiresIn: "10m" });
   });
+
   const params = {
     Source: process.env.EMAIL_FROM,
     Destination: {
