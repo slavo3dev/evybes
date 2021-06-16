@@ -24,19 +24,22 @@ export default function signUp() {
       btnText: "Login",
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     setUserInfo({
       ...userInfo,
       btnText: "Registering..."
     })
-    axios.post(`http://localhost:8080/api/register`, {
+
+    try {
+      const response = await axios.post(`http://localhost:8080/api/register`, {
       name: name,
       email: email,
       password: password
-    })
-      .then(response => {
-        setUserInfo({
+      })
+      
+      setUserInfo({
           ...userInfo, 
           name: "",
           email: "",
@@ -44,14 +47,15 @@ export default function signUp() {
           btnText: "Submitted",
           success: response.data.message
         })
-      })
-      .catch(error => {
-        setUserInfo({
+
+    }
+    catch (error) {
+       setUserInfo({
           ...userInfo,
           btnText: "Login",
           error: error.response.data.message
         })
-      })
+    }
   };
 
   const signUpForm = () => {
