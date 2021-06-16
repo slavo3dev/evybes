@@ -1,7 +1,8 @@
 import { Layout } from "../../components";
 import {useState} from "react";
 import axios from "axios"
-import { showErrorMessage, showSuccessMessage } from "../../helpers"
+import {showErrorMessage,showSuccessMessage} from "../../helpers"
+import {API} from "../../config"
 
 export default function signUp() {
   const [userInfo, setUserInfo] = useState({
@@ -33,7 +34,7 @@ export default function signUp() {
     })
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/register`, {
+      const response = await axios.post(`${API}/register`, {
       name: name,
       email: email,
       password: password
