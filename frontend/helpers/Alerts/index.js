@@ -10,7 +10,7 @@ export function showSuccessMessage(success) {
 
 export function showErrorMessage(error) {
     return (
-        <div className="alert alert-error">
+        <div className="alert alert-danger">
             {error}
         </div>
     )
